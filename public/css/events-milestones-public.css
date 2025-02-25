@@ -1,0 +1,497 @@
+/**
+ * Public styles for the Events Milestones plugin.
+ *
+ * @since      1.0.0
+ * @package    Events_Milestones
+ */
+
+/* Override theme layout styles to prevent conflicts */
+.events-milestones-wrapper body.is-layout-flex,
+body.is-layout-flex .events-milestones-wrapper,
+.events-milestones-wrapper div.is-layout-flex,
+div.is-layout-flex .events-milestones-wrapper,
+.events-milestones-wrapper .is-layout-flex,
+.events-milestones-wrapper.is-layout-flex,
+.em-milestones-container .is-layout-flex,
+.em-milestones-container.is-layout-flex,
+.em-rewards-container .is-layout-flex,
+.em-rewards-container.is-layout-flex {
+    display: block !important;
+    flex-direction: initial !important;
+    flex-wrap: initial !important;
+    align-items: initial !important;
+    justify-content: initial !important;
+    gap: 0 !important;
+}
+
+/* Reset and scope our styles */
+.events-milestones-wrapper {
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Then specifically style our flex elements as needed */
+.events-milestones-wrapper .em-milestones-grid,
+.events-milestones-wrapper .em-rewards-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+    gap: 25px !important;
+}
+
+/* Milestone Display */
+.em-milestones-container {
+    margin: 20px 0;
+}
+
+.em-milestones-grid {
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: 100%;
+}
+
+.em-milestone-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid #eaeaea;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.em-milestone-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.em-milestone-header {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    padding: 20px;
+    position: relative;
+    color: white;
+}
+
+.em-milestone-title {
+    margin: 0;
+    color: white;
+    font-size: 1.3em;
+    font-weight: 600;
+    line-height: 1.3;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.em-milestone-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #4CAF50;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.em-milestone-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.em-milestone-thumbnail {
+    overflow: hidden;
+    height: 180px;
+    background-color: #f7f7f7;
+    position: relative;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.em-milestone-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.em-milestone-card:hover .em-milestone-thumbnail img {
+    transform: scale(1.05);
+}
+
+.em-milestone-description {
+    margin-bottom: 20px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.em-milestone-criteria, 
+.em-milestone-rewards {
+    padding: 0;
+    margin-bottom: 20px;
+    margin-top: auto;
+}
+
+.em-milestone-criteria h4, 
+.em-milestone-rewards h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.em-specific-events-list,
+.em-rewards-list {
+    margin: 0;
+    padding-left: 20px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.em-specific-events-list li,
+.em-rewards-list li {
+    margin-bottom: 5px;
+}
+
+.em-milestone-locked {
+    opacity: 0.8;
+}
+
+.em-milestone-locked .em-milestone-header {
+    background: linear-gradient(135deg, #757F9A 0%, #D7DDE8 100%);
+}
+
+.em-milestone-achieved {
+    border: none;
+    box-shadow: 0 5px 15px rgba(76,175,80,0.3);
+}
+
+.em-milestone-achieved .em-milestone-header {
+    background: linear-gradient(135deg, #43A047 0%, #66BB6A 100%);
+}
+
+/* Reward Display */
+.em-rewards-container {
+    margin: 20px 0;
+}
+
+.em-rewards-grid {
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: 100%;
+}
+
+.em-reward-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid #eaeaea;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.em-reward-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.em-reward-header {
+    background: linear-gradient(135deg, #FF8008 0%, #FFC837 100%);
+    padding: 20px;
+    position: relative;
+    color: white;
+}
+
+.em-reward-title {
+    margin: 0;
+    color: white;
+    font-size: 1.3em;
+    font-weight: 600;
+    line-height: 1.3;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.em-reward-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #4CAF50;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.em-reward-badge.locked {
+    background: #757575;
+}
+
+.em-reward-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.em-reward-thumbnail {
+    overflow: hidden;
+    height: 180px;
+    background-color: #f7f7f7;
+    position: relative;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.em-reward-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.em-reward-card:hover .em-reward-thumbnail img {
+    transform: scale(1.05);
+}
+
+.em-reward-description,
+.em-reward-details {
+    margin-bottom: 20px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.em-reward-milestones {
+    padding: 0;
+    margin-bottom: 20px;
+    margin-top: auto;
+}
+
+.em-reward-milestones h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.em-milestones-list {
+    margin: 0;
+    padding-left: 20px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.em-milestones-list li {
+    margin-bottom: 5px;
+}
+
+.em-reward-locked {
+    opacity: 0.8;
+}
+
+.em-reward-locked .em-reward-header {
+    background: linear-gradient(135deg, #757F9A 0%, #D7DDE8 100%);
+}
+
+.em-reward-unlocked {
+    border: none;
+    box-shadow: 0 5px 15px rgba(255,152,0,0.3);
+}
+
+.em-reward-unlocked .em-reward-header {
+    background: linear-gradient(135deg, #FF8008 0%, #FFC837 100%);
+}
+
+/* Check-in Button */
+.em-checkin-container {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.em-checkin-button {
+    background-color: #0073aa;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.em-checkin-button:hover {
+    background-color: #005a87;
+}
+
+/* Modal */
+.em-modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.em-modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+}
+
+.em-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #777;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.em-modal-close:hover {
+    color: #333;
+}
+
+.em-events-list {
+    margin-top: 20px;
+}
+
+.em-event-item {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    background: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.em-event-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.em-event-title {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.em-event-meta {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.em-event-meta p {
+    margin: 8px 0;
+}
+
+.em-event-distance {
+    font-weight: bold;
+}
+
+.em-event-checkin {
+    background-color: #0073aa;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+
+.em-event-checkin:hover {
+    background-color: #005a87;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.em-error {
+    background-color: #ffeeee;
+    color: #cc0000;
+    padding: 10px;
+    border-radius: 3px;
+    margin-bottom: 15px;
+}
+
+.em-success {
+    background-color: #eeffee;
+    color: #006600;
+    padding: 10px;
+    border-radius: 3px;
+    margin-bottom: 15px;
+}
+
+#em-loading {
+    text-align: center;
+    padding: 15px;
+}
+
+.em-loading-spinner {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #0073aa;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    margin: 15px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.em-location-note {
+    color: #666;
+    font-size: 14px;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+.em-login-required {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 3px;
+    margin-top: 15px;
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .em-milestones-grid,
+    .em-rewards-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .em-modal-content {
+        width: 95%;
+        margin: 5% auto;
+    }
+}
