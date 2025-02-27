@@ -12,7 +12,7 @@ Events Milestones is a WordPress plugin that extends The Events Calendar to prov
 - **Reward System**: Attach rewards to milestones, which users can unlock upon achievement.
 - **Geolocation Check-in**: Users can check in to events using their device's geolocation (within a 5-mile radius).
 - **Multisite Support**: Pull events from any site in a WordPress multisite network.
-- **Shortcodes**: Easily display milestones, rewards, and check-in buttons anywhere on your site.
+- **Shortcodes**: Easily display milestones, rewards, check-in buttons, and activity feeds anywhere on your site.
 - **Featured Images**: Support for featured images on both milestones and rewards for visual engagement.
 - **Automatic Updates**: Plugin includes the ability to receive updates directly from this GitHub repository.
 
@@ -61,6 +61,8 @@ Use these shortcodes to display content on your site:
   - Attributes: `user_id`, `show_all`
 - `[em_checkin_button]` - Displays the check-in button
   - Attributes: `text`, `class`
+- `[em_activity_feed]` - Displays user's activity feed (check-ins and milestone achievements)
+  - Attributes: `user_id`, `limit`
 
 ### Multisite Configuration
 
@@ -98,6 +100,11 @@ This plugin is licensed under the GPL v2 or later.
 - Uses The Events Calendar by Modern Tribe
 
 ## Changelog
+
+### 1.1.1
+- Added new activity feed shortcode `[em_activity_feed]` to display user's check-ins and achievements
+- Added styling for the activity feed with responsive design
+- Updated documentation to include the new shortcode information
 
 ### 1.1.0
 - Added featured image support for milestones and rewards

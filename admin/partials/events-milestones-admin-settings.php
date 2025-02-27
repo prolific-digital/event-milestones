@@ -42,6 +42,12 @@
             <p>
                 <?php _e('Use the shortcode [em_rewards] to show a user\'s earned rewards.', 'events-milestones'); ?>
             </p>
+            <p>
+                <?php _e('Use the shortcode [em_checkin_button] to display a check-in button for events.', 'events-milestones'); ?>
+            </p>
+            <p>
+                <?php _e('Use the shortcode [em_activity_feed] to display a chronological feed of user\'s check-ins and milestone achievements.', 'events-milestones'); ?>
+            </p>
         </div>
         
         <div class="events-milestones-card" style="background-color: #fef8ee; border-left: 4px solid #f0b849;">
