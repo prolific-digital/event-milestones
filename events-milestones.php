@@ -3,7 +3,7 @@
  * Plugin Name: Events Milestones
  * Plugin URI: https://prolificdigital.com
  * Description: An add-on for The Events Calendar that introduces a system for managing event-related milestones and rewards.
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: Prolific Digital
  * Author URI: https://prolificdigital.com
  * Text Domain: events-milestones
@@ -20,7 +20,7 @@ if (!defined('WPINC')) {
 }
 
 // Define plugin constants
-define('EM_VERSION', '1.0.0');
+define('EM_VERSION', '1.1.0');
 define('EM_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('EM_PLUGIN_PATH', plugin_dir_path(__FILE__));
 define('EM_PLUGIN_BASENAME', plugin_basename(__FILE__));
