@@ -214,45 +214,12 @@ class EM_Checkin {
                     ));
                     return;
                 } else {
-                    // No events from source site, create fake events that clearly show which blog we're trying to pull from
-                    error_log('EM Debug: Creating fake events for source site ' . $this->multisite->get_source_site_id());
+                    // No events from source site, return empty array
+                    error_log('EM Debug: No events found from source site ' . $this->multisite->get_source_site_id());
                     
-                    // Create fallback events that show which site we're attempting to pull from
-                    $source_site_id = $this->multisite->get_source_site_id();
-                    
-                    $fake_events = array(
-                        array(
-                            'id' => 99991,
-                            'title' => 'Event #1 from Source Site: ' . $source_site_id,
-                            'start_date' => date('Y-m-d H:i:s', strtotime('+1 day 10:00:00')),
-                            'end_date' => date('Y-m-d H:i:s', strtotime('+1 day 16:00:00')),
-                            'venue' => 'Source Site: ' . $source_site_id,
-                            'distance' => 0,
-                            'permalink' => '#'
-                        ),
-                        array(
-                            'id' => 99992,
-                            'title' => 'Event #2 from Source Site: ' . $source_site_id,
-                            'start_date' => date('Y-m-d H:i:s', strtotime('+2 days 09:00:00')),
-                            'end_date' => date('Y-m-d H:i:s', strtotime('+2 days 17:00:00')),
-                            'venue' => 'Source Site: ' . $source_site_id,
-                            'distance' => 0,
-                            'permalink' => '#'
-                        ),
-                        array(
-                            'id' => 99993,
-                            'title' => 'Event #3 from Source Site: ' . $source_site_id,
-                            'start_date' => date('Y-m-d H:i:s', strtotime('+3 days 14:00:00')),
-                            'end_date' => date('Y-m-d H:i:s', strtotime('+3 days 21:00:00')),
-                            'venue' => 'Source Site: ' . $source_site_id,
-                            'distance' => 0,
-                            'permalink' => '#'
-                        )
-                    );
-                    
-                    // Return these fake events
+                    // Return empty events array
                     wp_send_json_success(array(
-                        'events' => $fake_events
+                        'events' => array()
                     ));
                     return; // Stop execution here
                 }
@@ -282,95 +249,16 @@ class EM_Checkin {
                     }
                 }
             } else {
-                // No events from source site, create fake events that clearly show which blog we're trying to pull from
-                error_log('EM Debug: Creating fake events for source site ' . $this->multisite->get_source_site_id());
+                // No events from source site, try to get events based on location
+                error_log('EM Debug: No events from source site, trying location-based search');
                 
-                // Create fallback events that show which site we're attempting to pull from
-                $source_site_id = $this->multisite->get_source_site_id();
+                // Get location-based events
+                $nearby_events = $this->get_nearby_events($latitude, $longitude, $radius);
+                error_log('EM Debug: Found ' . count($nearby_events) . ' nearby events');
                 
-                $fake_events = array(
-                    array(
-                        'id' => 99991,
-                        'title' => 'Event #1 from Source Site: ' . $source_site_id,
-                        'start_date' => date('Y-m-d H:i:s', strtotime('+1 day 10:00:00')),
-                        'end_date' => date('Y-m-d H:i:s', strtotime('+1 day 16:00:00')),
-                        'venue' => 'Source Site: ' . $source_site_id,
-                        'distance' => 0,
-                        'permalink' => '#'
-                    ),
-                    array(
-                        'id' => 99992,
-                        'title' => 'Event #2 from Source Site: ' . $source_site_id,
-                        'start_date' => date('Y-m-d H:i:s', strtotime('+2 days 09:00:00')),
-                        'end_date' => date('Y-m-d H:i:s', strtotime('+2 days 17:00:00')),
-                        'venue' => 'Source Site: ' . $source_site_id,
-                        'distance' => 0,
-                        'permalink' => '#'
-                    ),
-                    array(
-                        'id' => 99993,
-                        'title' => 'Event #3 from Source Site: ' . $source_site_id,
-                        'start_date' => date('Y-m-d H:i:s', strtotime('+3 days 14:00:00')),
-                        'end_date' => date('Y-m-d H:i:s', strtotime('+3 days 21:00:00')),
-                        'venue' => 'Source Site: ' . $source_site_id,
-                        'distance' => 0,
-                        'permalink' => '#'
-                    )
-                );
-                
-                // Add fake events to our list
-                foreach ($fake_events as $event) {
-                    $nearby_events[] = $event;
-                }
-                
-                // Also get location-based events
-                $location_events = $this->get_nearby_events($latitude, $longitude, $radius);
-                error_log('EM Debug: Found ' . count($location_events) . ' nearby events');
-                
-                // Add them to our list
-                foreach ($location_events as $event) {
-                    $nearby_events[] = $event;
-                }
-                
-                // If still no events, add sample events for testing
+                // If no events found, return empty array - no fake events
                 if (empty($nearby_events)) {
-                    error_log('EM Debug: No events found, adding sample events for testing');
-                    
-                    // Add dummy events for testing
-                    $test_events = array(
-                        array(
-                            'id' => 9999,
-                            'title' => 'Workshop: WordPress Development (Test Event)',
-                            'start_date' => date('Y-m-d H:i:s', strtotime('+1 day 10:00:00')),
-                            'end_date' => date('Y-m-d H:i:s', strtotime('+1 day 16:00:00')),
-                            'venue' => 'Tech Hub Downtown',
-                            'distance' => 0.5,
-                            'permalink' => '#'
-                        ),
-                        array(
-                            'id' => 9998,
-                            'title' => 'Conference: Future of Web (Test Event)',
-                            'start_date' => date('Y-m-d H:i:s', strtotime('+3 days 09:00:00')),
-                            'end_date' => date('Y-m-d H:i:s', strtotime('+4 days 17:00:00')),
-                            'venue' => 'Convention Center',
-                            'distance' => 1.2,
-                            'permalink' => '#'
-                        ),
-                        array(
-                            'id' => 9997,
-                            'title' => 'Networking: Tech Professionals Meetup (Test Event)',
-                            'start_date' => date('Y-m-d H:i:s', strtotime('+7 days 18:00:00')),
-                            'end_date' => date('Y-m-d H:i:s', strtotime('+7 days 21:00:00')),
-                            'venue' => 'Startup Incubator',
-                            'distance' => 2.7,
-                            'permalink' => '#'
-                        )
-                    );
-                    
-                    // Add test events to our list
-                    foreach ($test_events as $event) {
-                        $nearby_events[] = $event;
-                    }
+                    error_log('EM Debug: No events found nearby');
                 }
             }
             
@@ -1034,46 +922,9 @@ class EM_Checkin {
      * @return   array                     Array of fake events.
      */
     private function get_fake_events($source_site_id) {
-        error_log("EM Debug: Creating fake events for source site " . $source_site_id);
-        
-        // Set all events to today for consistency with our filtering
-        $today = date('Y-m-d');
-        
-        // Use the global radius or default to 5 miles
-        global $em_radius;
-        $radius = isset($em_radius) ? $em_radius : 5; // 5 miles
-        error_log("EM Debug: Using radius {$radius} miles for fake events");
-        
-        // Make sure all dummy events are within the radius
-        return array(
-            array(
-                'id' => 99991,
-                'title' => 'Demo Event #1', // No source suffix
-                'start_date' => $today . ' 10:00:00',
-                'end_date' => $today . ' 16:00:00',
-                'venue' => 'Main Convention Center',
-                'distance' => 0.8, // Within radius
-                'permalink' => '#'
-            ),
-            array(
-                'id' => 99992,
-                'title' => 'Demo Event #2', // No source suffix
-                'start_date' => $today . ' 12:30:00',
-                'end_date' => $today . ' 17:00:00',
-                'venue' => 'Downtown Library',
-                'distance' => 1.2, // Within radius
-                'permalink' => '#'
-            ),
-            array(
-                'id' => 99993,
-                'title' => 'Demo Event #3', // No source suffix
-                'start_date' => $today . ' 14:00:00',
-                'end_date' => $today . ' 21:00:00',
-                'venue' => 'City Park Pavilion',
-                'distance' => 1.7, // Within radius
-                'permalink' => '#'
-            )
-        );
+        error_log("EM Debug: No events found for source site " . $source_site_id);
+        // Return empty array - no fake events
+        return array();
     }
 
     /**

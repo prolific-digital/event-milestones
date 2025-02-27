@@ -58,7 +58,7 @@ class EM_Public {
         wp_localize_script($this->plugin_name, 'em_ajax', array(
             'ajax_url' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce('em_checkin_nonce'),
-            'checkin_radius' => get_option('em_checkin_radius', 10),
+            'radius' => get_option('em_checkin_radius', 10), // Used by JS for radius parameter
             'is_user_logged_in' => is_user_logged_in(),
             'i18n' => array(
                 'loading' => __('Loading nearby events...', 'events-milestones'),

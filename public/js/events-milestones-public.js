@@ -462,8 +462,7 @@
                 $('#em-geolocation-error').html("Location detection is taking longer than expected. Please try again or enter your coordinates manually.").show();
                 $('#em-retry-geolocation').show();
                 
-                // Show demo events for testing
-                demoEvents();
+                // No demo events for production use
                 
                 // Show manual entry form
                 setTimeout(function() {
@@ -505,8 +504,8 @@
             return;
         }
         
-        // Always use 5 miles as the radius
-        var radius = 5;
+        // Use the radius from the configuration data
+        var radius = em_ajax.radius ? parseInt(em_ajax.radius) : 10;
         
         console.log("Sending AJAX request with:", {
             action: 'em_get_nearby_events',
