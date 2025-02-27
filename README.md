@@ -14,6 +14,7 @@ Events Milestones is a WordPress plugin that extends The Events Calendar to prov
 - **Multisite Support**: Pull events from any site in a WordPress multisite network.
 - **Shortcodes**: Easily display milestones, rewards, and check-in buttons anywhere on your site.
 - **Featured Images**: Support for featured images on both milestones and rewards for visual engagement.
+- **Automatic Updates**: Plugin includes the ability to receive updates directly from this GitHub repository.
 
 ## Requirements
 
@@ -109,6 +110,7 @@ This plugin is licensed under the GPL v2 or later.
 - Streamlined milestone and reward criteria styling
 - Improved admin settings layout
 - Removed duplicate directory structure
+- Added automatic updates from GitHub repository
 
 ### 1.0.0
 - Initial release
