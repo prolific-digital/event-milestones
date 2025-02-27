@@ -28,6 +28,19 @@ define('EM_PLUGIN_BASENAME', plugin_basename(__FILE__));
 // We no longer need to define constants for source site ID
 // as we're using standard WordPress options API
 
+// Set up the update checker
+require_once __DIR__ . '/vendor/plugin-update-checker/plugin-update-checker.php';
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+
+$myUpdateChecker = PucFactory::buildUpdateChecker(
+    'https://github.com/prolific-digital/event-milestones/',
+    __FILE__,
+    'events-milestones'
+);
+
+// Set the branch that contains the stable release.
+$myUpdateChecker->setBranch('main');
+
 /**
  * Check if The Events Calendar is active in target site
  * 
