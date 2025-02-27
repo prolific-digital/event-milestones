@@ -475,6 +475,95 @@ div.is-layout-flex .events-milestones-wrapper,
     margin-top: 10px;
 }
 
+/* Activity Feed Styles */
+.em-activity-feed {
+    margin: 20px 0;
+}
+
+.em-activity-feed-title {
+    margin-bottom: 20px;
+}
+
+.em-activity-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.em-activity-item {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    border-left: 4px solid #ddd;
+}
+
+.em-activity-checkin {
+    border-left-color: #0073aa;
+}
+
+.em-activity-milestone {
+    border-left-color: #43A047;
+}
+
+.em-activity-meta {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.em-activity-content {
+    display: flex;
+    align-items: flex-start;
+}
+
+.em-activity-icon {
+    margin-right: 15px;
+}
+
+.em-activity-icon .dashicons {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+}
+
+.em-activity-checkin .em-activity-icon .dashicons {
+    color: #0073aa;
+}
+
+.em-activity-milestone .em-activity-icon .dashicons {
+    color: #43A047;
+}
+
+.em-activity-details {
+    flex: 1;
+}
+
+.em-activity-action {
+    display: block;
+    margin-bottom: 3px;
+}
+
+.em-activity-title {
+    font-weight: bold;
+    display: block;
+}
+
+.em-activity-description {
+    margin-top: 8px;
+    font-size: 0.9em;
+}
+
+.em-activity-empty {
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    text-align: center;
+    color: #666;
+}
+
 .em-login-required {
     background-color: #f9f9f9;
     padding: 15px;
@@ -485,6 +574,14 @@ div.is-layout-flex .events-milestones-wrapper,
 
 /* Responsive */
 @media (max-width: 768px) {
+    .em-activity-content {
+        flex-direction: column;
+    }
+    
+    .em-activity-icon {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
     .em-milestones-grid,
     .em-rewards-grid {
         grid-template-columns: 1fr;

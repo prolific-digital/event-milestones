@@ -87,6 +87,7 @@ class EM_Public {
         add_shortcode('em_milestones', array($this, 'milestones_shortcode'));
         add_shortcode('em_rewards', array($this, 'rewards_shortcode'));
         add_shortcode('em_checkin_button', array($this, 'checkin_button_shortcode'));
+        add_shortcode('em_activity_feed', array($this, 'activity_feed_shortcode'));
     }
 
     /**
@@ -182,6 +183,97 @@ class EM_Public {
 
         ob_start();
         include EM_PLUGIN_PATH . 'public/partials/checkin-button-display.php';
+        return ob_get_clean();
+    }
+    
+    /**
+     * Shortcode for displaying user activity feed.
+     *
+     * @since    1.1.0
+     * @param    array    $atts    The shortcode attributes.
+     * @return   string            The shortcode output.
+     */
+    public function activity_feed_shortcode($atts) {
+        $atts = shortcode_atts(array(
+            'user_id' => get_current_user_id(),
+            'limit' => 10,
+        ), $atts, 'em_activity_feed');
+        
+        // If not logged in and no specific user_id provided, show a login message
+        if ($atts['user_id'] == 0) {
+            return '<div class="em-login-required">' . __('Please log in to view your activity.', 'events-milestones') . '</div>';
+        }
+        
+        // Get user check-ins
+        $checkin_obj = new EM_Checkin();
+        $user_checkins = $checkin_obj->get_user_checkins($atts['user_id']);
+        
+        // Get user milestone achievements
+        $milestone_obj = new EM_User_Milestone();
+        $achieved_milestones = $milestone_obj->get_user_achievements($atts['user_id']);
+        
+        // Create combined activity array with timestamps for sorting
+        $activity_feed = array();
+        
+        // Add check-ins to activity feed
+        foreach ($user_checkins as $checkin) {
+            $activity_feed[] = array(
+                'type' => 'checkin',
+                'event_id' => $checkin['event_id'],
+                'title' => $checkin['event_title'],
+                'timestamp' => $checkin['timestamp'],
+                'date' => $checkin['date'],
+            );
+        }
+        
+        // Add milestone achievements to activity feed
+        foreach ($achieved_milestones as $milestone) {
+            // Get the achievement date from user milestone post
+            $args = array(
+                'post_type' => 'em_user_milestone',
+                'posts_per_page' => 1,
+                'meta_query' => array(
+                    array(
+                        'key' => '_em_user_id',
+                        'value' => $atts['user_id'],
+                    ),
+                    array(
+                        'key' => '_em_milestone_id',
+                        'value' => $milestone->ID,
+                    ),
+                ),
+            );
+            
+            $achievement_posts = get_posts($args);
+            
+            if (!empty($achievement_posts)) {
+                $achievement_post = $achievement_posts[0];
+                $achievement_date = get_post_meta($achievement_post->ID, '_em_achievement_date', true);
+                $achievement_timestamp = strtotime($achievement_date);
+                
+                $activity_feed[] = array(
+                    'type' => 'milestone',
+                    'milestone_id' => $milestone->ID,
+                    'title' => $milestone->post_title,
+                    'timestamp' => $achievement_timestamp,
+                    'date' => date_i18n(get_option('date_format'), $achievement_timestamp),
+                    'description' => get_post_meta($milestone->ID, '_em_description', true),
+                );
+            }
+        }
+        
+        // Sort by timestamp (newest first)
+        usort($activity_feed, function($a, $b) {
+            return $b['timestamp'] - $a['timestamp'];
+        });
+        
+        // Limit the number of items if specified
+        if ($atts['limit'] > 0) {
+            $activity_feed = array_slice($activity_feed, 0, $atts['limit']);
+        }
+        
+        ob_start();
+        include EM_PLUGIN_PATH . 'public/partials/activity-feed-display.php';
         return ob_get_clean();
     }
 }

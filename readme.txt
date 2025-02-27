@@ -1,128 +1,84 @@
 === Events Milestones ===
 Contributors: prolificdigital
-Tags: events, milestones, rewards, gamification, check-in
-Requires at least: 5.0
-Tested up to: 6.4
-Requires PHP: 7.0
-Stable tag: 1.1.0
+Donate link: https://prolificdigital.com
+Tags: events, gamification, milestones, rewards
+Requires at least: 5.9
+Tested up to: 6.5
+Stable tag: 1.1.1
+Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-An add-on for The Events Calendar that introduces a system for managing event-related milestones and rewards.
+An add-on for The Events Calendar that introduces a gamification system with milestones and rewards based on event check-ins.
 
 == Description ==
 
-Events Milestones is a WordPress plugin that extends The Events Calendar to provide a milestone and reward system for users who check in to events. It allows event organizers to create achievements that users can unlock by attending events, encouraging participation and engagement.
+Events Milestones is an extension for The Events Calendar that adds a gamification layer to your events. The plugin allows users to check in to events and earn milestones and rewards based on their participation.
 
-= Features =
+### Features
 
-* **Milestone Management**: Create and manage milestones with different achievement criteria (number of events, specific events, events within a timeframe).
-* **Reward System**: Attach rewards to milestones, which users can unlock upon achievement.
-* **Geolocation Check-in**: Users can check in to events using their device's geolocation (within a 5-mile radius).
-* **Multisite Support**: Pull events from any site in a WordPress multisite network.
-* **Shortcodes**: Easily display milestones, rewards, and check-in buttons anywhere on your site.
-* **Featured Images**: Support for featured images on both milestones and rewards for visual engagement.
-* **Automatic Updates**: Plugin includes the ability to receive updates directly from GitHub.
+* **User Check-ins**: Allow users to check in to events within a certain radius
+* **Milestone System**: Create milestones that users can achieve by checking in to events
+* **Rewards System**: Attach rewards to milestones to incentivize participation
+* **Multisite Support**: Check in to events across a WordPress network
+* **Shortcodes**: Display user milestones, rewards, check-in buttons, and activity feeds
+* **Automatic Updates**: Plugin updates automatically from GitHub repository
 
-= Requirements =
+### Shortcodes
 
-* WordPress 5.0 or higher
-* The Events Calendar 5.0 or higher (Pro version is optional but supported)
-* PHP 7.0 or higher
+* `[em_milestones]` - Displays user milestones
+* `[em_rewards]` - Displays user rewards
+* `[em_checkin_button]` - Displays a check-in button for events
+* `[em_activity_feed]` - Displays a user's activity feed (check-ins and milestone achievements)
 
 == Installation ==
 
 1. Upload the `events-milestones` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Ensure The Events Calendar is installed and activated
-4. Go to Events Milestones in the admin menu to configure the plugin
-
-== Usage ==
-
-= Creating Milestones =
-
-1. Go to Events Milestones > Add New Milestone
-2. Enter a title and description for the milestone
-3. Add a featured image that represents the milestone (optional)
-4. Set the criteria for achieving the milestone:
-   * Number of events: User must check in to a specific number of events
-   * Events in timeframe: User must check in to a specific number of events within a certain number of days
-   * Specific events: User must check in to all of the selected events
-5. Select the rewards that will be unlocked when the milestone is achieved
-6. Click Publish
-
-= Creating Rewards =
-
-1. Go to Events Milestones > Add New Reward
-2. Enter a title and description for the reward
-3. Add a featured image that represents the reward (optional)
-4. Optionally add additional details in the Reward Details section
-5. Click Publish
-
-= Displaying Content =
-
-Use these shortcodes to display content on your site:
-
-* `[em_milestones]` - Displays available milestones
-  * Attributes: `user_id`, `show_all`
-* `[em_rewards]` - Displays available rewards
-  * Attributes: `user_id`, `show_all`
-* `[em_checkin_button]` - Displays the check-in button
-  * Attributes: `text`, `class`
-
-= Multisite Configuration =
-
-If you're using WordPress multisite, you can configure which site to pull events from:
-
-1. Go to Events Milestones > Settings
-2. Select the source site from the dropdown
-3. Click Save Changes
-
-== Frequently Asked Questions ==
-
-= Do users need to be logged in to check in to events? =
-
-Yes, users must be logged in to check in to events and track their progress towards milestones.
-
-= How does the check-in system work? =
-
-When a user clicks the check-in button, the plugin will use the browser's geolocation API to get the user's coordinates. It will then find events within a 5-mile radius and let the user check in to an event if they are near the venue location. If location detection fails, users may need to switch networks or try again.
-
-= Can I customize the appearance of the milestones and rewards? =
-
-Yes, you can use custom CSS to style the milestone and reward elements. The plugin provides CSS classes for each element and is designed to work well with most WordPress themes.
-
-= How do I reset a user's progress? =
-
-Administrators can reset a user's check-ins and milestone achievements through the Events Milestones > Settings page using the Reset User Data tool.
-
-== Screenshots ==
-
-1. Milestone display with featured images
-2. Rewards display showing unlocked and locked rewards
-3. Admin interface for creating milestones
-4. Admin interface for creating rewards
-5. Check-in modal for users
+3. Go to Events Milestones in the admin menu to configure the plugin
 
 == Changelog ==
 
+= 1.1.1 =
+* Added new activity feed shortcode `[em_activity_feed]` to display user's check-ins and achievements
+* Added styling for the activity feed
+
 = 1.1.0 =
+* Fixed hardcoded 5-mile radius issue in geolocation functionality
+* Fixed issue with demo events appearing when no real events were found
+* Added automatic update capability via GitHub
 * Added featured image support for milestones and rewards
-* Fixed milestone event count values to correctly save values above 1
-* Improved geolocation error handling and messaging
-* Set geolocation radius to 5 miles
-* Updated plugin author information
-* Fixed form validation issues in milestone admin
-* Fixed CSS layout conflicts with themes
-* Streamlined milestone and reward criteria styling
-* Improved admin settings layout
-* Removed duplicate directory structure
-* Added automatic updates from GitHub repository
+* Fixed milestone event count values
+* Fixed CSS conflicts with themes
+* Improved geolocation handling with better error messages
+* Various bug fixes and improvements
 
 = 1.0.0 =
 * Initial release
 
+== Frequently Asked Questions ==
+
+= Does this plugin work without The Events Calendar? =
+
+While the plugin will activate without The Events Calendar, most of its functionality is dependent on it. You'll see a notice recommending you to install The Events Calendar.
+
+= How does the check-in system work? =
+
+Users click a check-in button which uses their browser's geolocation API to determine if they are within a configurable radius of the event's venue. If they are, the check-in is recorded.
+
+= Can I customize the radius for check-ins? =
+
+Yes, the radius for check-ins can be configured in the plugin settings.
+
+== Screenshots ==
+
+1. Milestones display
+2. Rewards display 
+3. Check-in button and nearby events
+4. Admin milestones management
+5. Activity feed showing user check-ins and achievements
+
 == Upgrade Notice ==
 
-= 1.1.0 =
-This update adds featured image support for milestones and rewards, fixes milestone event counting, improves geolocation, and resolves several UI issues. Upgrade recommended for all users.
+= 1.1.1 =
+Added new activity feed feature to show users' check-ins and milestone achievements.
